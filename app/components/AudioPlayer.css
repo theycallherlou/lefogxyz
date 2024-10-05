@@ -1,0 +1,32 @@
+.icon-container {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-label {
+  height: 1.5rem;
+  width: 3rem;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.75rem;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.icon-container:hover .icon-label {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.icon-button svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}

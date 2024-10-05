@@ -8,7 +8,7 @@ export const playlist = [
   {
     id: 1,
     title: 'Draw From the Sleep Well',
-    url: '/audio/sleep.mp3',
+    url: '/audio/well.mp3',
     duration: '03:45'
   }
 ];

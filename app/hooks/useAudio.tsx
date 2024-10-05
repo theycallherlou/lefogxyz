@@ -1,5 +1,6 @@
+'use client';
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Howl } from 'howler';
+import { Howl, Howler } from 'howler';
 import { playlist } from '@/data';
 
 export default function useAudio() {
@@ -12,29 +13,25 @@ export default function useAudio() {
 
   const song = playlist[currentIndex];
 
-  const songRef = useRef<Howl | null>();
+  const songRef = useRef<Howl | null>(null);
 
   const play = useCallback(async () => {
-    if (songRef.current) {
-      /**
-       * chrome policy: suspend audio context when audio is not playing
-       */
-      if (Howler.ctx.state === 'suspended') {
-        try {
-          await Howler.ctx.resume();
-          if (!songRef.current.playing()) {
-            songRef.current.play();
-          }
-        } catch (error) {
-          console.error('Error resuming audio context:', error);
-        }
-      } else {
-        if (songRef.current.playing()) {
-          songRef.current.pause();
-        } else {
-          songRef.current.play();
-        }
+    if (!songRef.current) return;
+
+    if (Howler.ctx.state === 'suspended') {
+      try {
+        await Howler.ctx.resume();
+      } catch (error) {
+        console.error(
+          `There was an error resuming the audio context: ${error}`
+        );
       }
+    }
+
+    if (songRef.current.playing()) {
+      songRef.current.pause();
+    } else {
+      songRef.current.play();
     }
   }, []);
 
@@ -48,12 +45,12 @@ export default function useAudio() {
   );
 
   const muteChange = useCallback(() => {
-    setMute((prevMute) => {
+    setMute((prevMute: boolean) => {
       const newMute = !prevMute;
       songRef.current?.mute(newMute);
       return newMute;
     });
-  }, [setMute]);
+  }, []);
 
   const changeSong = useCallback((newIndex: number) => {
     setCurrentIndex(newIndex);
@@ -88,10 +85,9 @@ export default function useAudio() {
       src: [song.url],
       html5: true,
       preload: 'metadata',
-      loop: false,
-      autoplay: false,
       onload: () => {
-        setDuration(song.duration);
+        const durationSeconds = songRef.current?.duration() as number;
+        setDuration(formatTime(durationSeconds));
       },
       onplay: () => {
         setPlayback(true);
@@ -103,10 +99,17 @@ export default function useAudio() {
         nextSong();
       }
     });
-  }, [currentIndex, song.url, song.duration, nextSong]);
+
+    songRef.current = howl;
+
+    return () => {
+      howl.unload();
+      songRef.current = null;
+    };
+  }, [song.url, nextSong]);
 
   useEffect(() => {
-    let intervalId: NodeJS.Timeout;
+    let intervalId: NodeJS.Timeout | null = null;
     if (playback && songRef.current) {
       intervalId = setInterval(() => {
         const currentSeconds = songRef.current?.seek() as number;
@@ -114,12 +117,15 @@ export default function useAudio() {
       }, 1000);
     }
 
-    return () => clearInterval(intervalId);
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
   }, [playback]);
 
   return {
     song,
-    songRef,
     play,
     volume,
     volumeChange,
@@ -131,7 +137,6 @@ export default function useAudio() {
     previousSong,
     nextSong,
     currentIndex,
-    setCurrentIndex,
     changeSong,
     formatTime
   };
