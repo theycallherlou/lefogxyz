@@ -1,12 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { 
-  karla,
-  anaheim,
-  barlowLight,
-  barlowRegular,
-  barlowMedium
-} from '@style/fonts';
+import { barlowLight, barlowRegular, barlowMedium } from '@style/fonts';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -21,9 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${
-          barlowMedium.className
-        } antialiased`}
+        className={`${barlowMedium.className}
+          ${barlowRegular.className} 
+          ${barlowLight.className} antialiased`}
       >
         <main>{children}</main>
       </body>
