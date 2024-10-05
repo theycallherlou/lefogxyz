@@ -1,0 +1,18 @@
+# `dependabot.yml` + customized npm configuration
+
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    labels:
+      - 'npm dependencies'
+    groups:
+      production-dependencies:
+        dependency-type: 'production'
+      development-dependencies:
+        dependency-type: 'development'
+    ignore:
+      - dependency-name: 'eslint'
+        versions: ['8.x']
