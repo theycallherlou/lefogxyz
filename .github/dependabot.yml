@@ -2,6 +2,14 @@
 
 version: 2
 updates:
+
+  - package-ecosystem: "github-actions"
+    # Workflow files stored in the default location of `.github/workflows`. (You don't need to specify `/.github/workflows` for `directory`. You can use `directory: "/"`.)
+    directory: "/"
+    schedule:
+      # Check for updates to GitHub Actions every weekday
+      interval: "weekly"
+      
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
@@ -16,3 +24,5 @@ updates:
     ignore:
       - dependency-name: 'eslint'
         versions: ['8.x']
+      - dependency-name: 'eslint-config-next'
+        versions: ['14.x']
