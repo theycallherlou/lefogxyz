@@ -1,0 +1,11 @@
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --rootback: hsla(0, 0%, 0%, 1); /* #000000ff */
+    --rootfront: hsla(0, 0%, 100%, 1); /* #ffffffff */
+    --text: hsla(76, 35%, 94%, 1); /* #f2f5eaff */
+    --background: hsla(208, 18%, 21%, 1); /* #2c363fff */
+    --primary: hsla(81, 24%, 71%, 1); /* #bbc7a4ff */
+    --secondary: hsla(93, 11%, 84%, 1); /* #d6dbd2ff */
+    --accent: hsla(358, 24%, 52%, 1); /* #a26769ff */
+  }
+}
