@@ -29,12 +29,12 @@ export default function AudioPlayer() {
   };
 
   return (
-    <div className="border-4 border-slate-300 h-full w-full flex flex-col justify-around items-center p-2">
+    <div className="h-full w-full flex flex-col justify-around items-center p-2">
       <section className="min-h-40 w-full flex flex-col justify-evenly items-center text-center p-2">
         {playback && (
           <article className="">
-            <div className="">{`${song.title}`}</div>
-            <div className="">{`${elapsed} / ${duration}`}</div>
+            <div className="font-semibold subpixel-antialiased">{`${song.title}`}</div>
+            <div className="font-normal subpixel-antialiased">{`${elapsed} / ${duration}`}</div>
           </article>
         )}
       </section>
