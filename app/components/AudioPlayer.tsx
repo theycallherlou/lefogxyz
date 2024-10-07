@@ -42,7 +42,11 @@ export default function AudioPlayer() {
       <section className="w-full flex justify-between items-center p-2">
         <div className="icon-container">
           <button onClick={play} className="icon-button">
-            {playback ? <Pause weight="duotone" /> : <Play weight="duotone" />}
+            {playback ? (
+              <Pause weight="duotone" className="w-48 h-48 sm:w-52 sm:h-52sa" />
+            ) : (
+              <Play weight="duotone" className="w-48 h-48 sm:w-52 sm:h-52sa" />
+            )}
           </button>
           <label className="icon-label" htmlFor="play">
             {playback ? 'Pause' : 'Play'}
@@ -51,7 +55,10 @@ export default function AudioPlayer() {
 
         <div className="icon-container">
           <button onClick={previousSong} className="icon-button">
-            <SkipBack weight="duotone" />
+            <SkipBack
+              weight="duotone"
+              className="w-48 h-48 sm:w-52 sm:h-52sa"
+            />
           </button>
           <label className="icon-label">Previous</label>
         </div>
