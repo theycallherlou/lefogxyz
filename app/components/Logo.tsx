@@ -1,31 +1,45 @@
-import { useState, useEffect } from 'react';
+'use client';
+
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
 
 export default function Logo() {
-  const [mode, setMode] = useState<boolean>(false);
+  const [colorScheme, setColorScheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
-    const query = window.matchMedia('(prefers-color-scheme: dark)');
-    setMode(query.matches);
-    const handler = (e: MediaQueryListEvent) => setMode(e.matches);
-    query.addEventListener('change', handler);
+    const q = window.matchMedia('(prefers-color-scheme: dark)');
+    setColorScheme(q.matches ? 'dark' : 'light');
+    const handleChange = (e: MediaQueryListEvent) => {
+      setColorScheme(e.matches ? 'dark' : 'light');
+    };
+    q.addEventListener('change', handleChange);
+
     return () => {
-      query.removeEventListener('change', handler);
+      q.removeEventListener('change', handleChange);
     };
   }, []);
 
   return (
     <div>
-      <Image
-        src={mode ? '/images/logo_dark.png' : '/images/logo_light.png'}
-        alt="logo for le fog"
-        width={500}
-        height={500}
-        className="logo"
-        title="logo for le fog"
-        aria-label="logo for le fog"
-        priority
-      />
+      {colorScheme === 'dark' ? (
+        <Image
+          src="/images/logo_dark.png"
+          alt="Dark mode logo"
+          width={400}
+          height={400}
+          priority
+          aria-label="Dark mode logo"
+        />
+      ) : (
+        <Image
+          src="/images/logo_light.png"
+          alt="Light mode logo"
+          width={400}
+          height={400}
+          priority
+          aria-label="Light mode logo"
+        />
+      )}
     </div>
   );
 }

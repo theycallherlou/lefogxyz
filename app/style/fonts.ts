@@ -6,21 +6,10 @@ const karla = localFont({
   variable: '--font-karla'
 });
 
-const anaheim = localFont({
-  src: '../fonts/Anaheim/Anaheim-VariableFont_wght.ttf',
-  variable: '--font-anaheim'
-});
-
 const barlowLight = Barlow({
   subsets: ['latin'],
   weight: '300',
   style: 'normal'
-});
-
-const barlowLightItalic = Barlow({
-  subsets: ['latin'],
-  weight: '300',
-  style: 'italic'
 });
 
 const barlowRegular = Barlow({
@@ -29,7 +18,7 @@ const barlowRegular = Barlow({
   style: 'normal'
 });
 
-const barlowRegularItalic = Barlow({
+const barlowItalic = Barlow({
   subsets: ['latin'],
   weight: '400',
   style: 'italic'
@@ -41,47 +30,17 @@ const barlowMedium = Barlow({
   style: 'normal'
 });
 
-const barlowMediumItalic = Barlow({
-  subsets: ['latin'],
-  weight: '500',
-  style: 'italic'
-});
-
 const barlowSemiBold = Barlow({
   subsets: ['latin'],
   weight: '600',
   style: 'normal'
 });
 
-const barlowSemiBoldItalic = Barlow({
-  subsets: ['latin'],
-  weight: '600',
-  style: 'italic'
-});
-
-const barlowBold = Barlow({
-  subsets: ['latin'],
-  weight: '700',
-  style: 'normal'
-});
-
-const barlowBoldItalic = Barlow({
-  subsets: ['latin'],
-  weight: '700',
-  style: 'italic'
-});
-
 export {
   karla,
-  anaheim,
   barlowLight,
-  barlowLightItalic,
   barlowRegular,
-  barlowRegularItalic,
+  barlowItalic,
   barlowMedium,
-  barlowMediumItalic,
-  barlowSemiBold,
-  barlowSemiBoldItalic,
-  barlowBold,
-  barlowBoldItalic
+  barlowSemiBold
 };
