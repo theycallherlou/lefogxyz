@@ -8,7 +8,9 @@ import {
   SpeakerSlash,
   SpeakerX
 } from '@phosphor-icons/react';
+import { karla } from '@/style/fonts';
 import './AudioPlayer.css';
+import Controls from '@/components/Controls';
 export default function AudioPlayer() {
   const {
     song,
@@ -29,59 +31,76 @@ export default function AudioPlayer() {
   };
 
   return (
-    <div className="h-full w-full flex flex-col justify-around items-center p-2">
-      <section className="min-h-40 w-full flex flex-col justify-evenly items-center text-center p-2">
+    <div className="min-h-60 max-w-96 mx-auto flex flex-col justify-between items-center p-2">
+      <section className="min-h-32 w-full">
         {playback && (
-          <article className="">
-            <div className="font-semibold subpixel-antialiased">{`${song.title}`}</div>
-            <div className="font-normal subpixel-antialiased">{`${elapsed} / ${duration}`}</div>
+          <article className="w-full text-center flex flex-col items-center justify-center p-2">
+            <div
+              className={`${karla.variable} text-base`}
+            >{`${song.title}`}</div>
+            <div className="text-sm">{`${elapsed} / ${duration}`}</div>
           </article>
         )}
       </section>
 
-      <section className="w-full flex justify-between items-center p-2">
-        <div className="icon-container">
-          <button onClick={play} className="icon-button">
+      <section className="flex justify-between items-end p-2">
+        <div className="flex flex-col justify-center items-center flex-1">
+          <button
+            onClick={play}
+            className="flex flex-col justify-center items-center p-4"
+          >
             {playback ? (
-              <Pause weight="duotone" className="w-48 h-48 sm:w-52 sm:h-52sa" />
+              <Pause weight="duotone" className="h-6 w-6" />
             ) : (
-              <Play weight="duotone" className="w-48 h-48 sm:w-52 sm:h-52sa" />
+              <Play weight="duotone" className="h-6 w-6" />
             )}
+            <label className="" htmlFor="play">
+              {playback ? 'Pause' : 'Play'}
+            </label>
           </button>
-          <label className="icon-label" htmlFor="play">
-            {playback ? 'Pause' : 'Play'}
-          </label>
         </div>
 
-        <div className="icon-container">
-          <button onClick={previousSong} className="icon-button">
-            <SkipBack
-              weight="duotone"
-              className="w-48 h-48 sm:w-52 sm:h-52sa"
-            />
+        <div className="flex flex-col justify-center items-center flex-1">
+          <button
+            onClick={previousSong}
+            className="flex flex-col justify-center items-center p-4"
+          >
+            <SkipBack weight="duotone" className="h-6 w-6" />
+            <label className="" htmlFor="previous">
+              Previous
+            </label>
           </button>
-          <label className="icon-label">Previous</label>
         </div>
 
-        <div className="icon-container">
-          <button onClick={nextSong} className="icon-button">
-            <SkipForward weight="duotone" />
+        <div className="flex flex-col justify-center items-center flex-1">
+          <button
+            onClick={nextSong}
+            className="flex flex-col justify-center items-center p-4"
+          >
+            <SkipForward weight="duotone" className="h-6 w-6" />
+            <label className="" htmlFor="next">
+              Next
+            </label>
           </button>
-          <label className="icon-label">Next</label>
         </div>
 
-        <div className="icon-container">
-          <button onClick={muteChange} className="icon-button">
+        <div className="flex flex-col justify-center items-center flex-1">
+          <button
+            onClick={muteChange}
+            className="flex flex-col justify-center items-center p-4"
+          >
             {mute ? (
-              <SpeakerX weight="duotone" />
+              <SpeakerX weight="duotone" className="h-6 w-6" />
             ) : (
-              <SpeakerSlash weight="duotone" />
+              <SpeakerSlash weight="duotone" className="h-6 w-6" />
             )}
-            <label className="icon-label">{mute ? 'Unmute' : 'Mute'}</label>
+            <label className="" htmlFor="mute">
+              {mute ? 'Unmute' : 'Mute'}
+            </label>
           </button>
         </div>
 
-        <div className="icon-container">
+        <div className="flex flex-col justify-center items-center flex-1">
           <input
             id="volume"
             type="range"
@@ -91,9 +110,10 @@ export default function AudioPlayer() {
             value={volume}
             onChange={handleSongChange}
           />
-          <label className="icon-label">Volume</label>
+          <label className="">Volume</label>
         </div>
       </section>
+      <Controls />
     </div>
   );
 }
