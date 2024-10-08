@@ -5,16 +5,13 @@ import Logo from '@/components/Logo';
 export default function Home() {
   return (
     <div
-      className={`${barlowLight.className} min-h-screen w-full max-w-screen-lg mx-auto p-2`}
+      className={`${barlowLight.className} min-h-screen w-full max-w-screen-lg mx-auto flex flex-col justify-between items-center`}
     >
-      <section className="h-full w-full mx-auto flex flex-col justify-between items-center p-2">
-        <div className="w-full mx-auto flex justify-center items-center p-2">
-          <Logo />
-        </div>
-        <h1 className="text-center text-3xl">ELECTRIFIED METER</h1>
-        <div className="w-full max-w-screen-lg mx-auto min-h-40 mb-6">
-          <AudioPlayer />
-        </div>
+      <section className="w-full flex justify-center items-center flex-1">
+        <Logo />
+      </section>
+      <section className="w-full max-w-screen-md mx-auto min-h-40 flex-0">
+        <AudioPlayer />
       </section>
     </div>
   );

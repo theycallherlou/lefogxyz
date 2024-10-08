@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -11,43 +11,46 @@
 :root {
   --white: #ffffffff;
   --black: #000000ff;
-  --text: #373e49ff;
+  --text: #353839ff;
   --background: #d2d9dbff;
-  --primary: #bbc7a4ff;
-  --secondary: #f4f4eeff;
-  --accent: #a26769ff;
+  --primary: #45495bff;
+  --secondary: #d4b483ff;
+  --accent: #c1666bff;
 }
 
 html {
-  min-height: 100dvh;
-  padding: 0.25rem;
+  max-width: 100dvw;
   font-family: var(--font-barlow), system-ui, -apple-system, BlinkMacSystemFont,
-    'Segoe UI';
+    'Segoe UI', Arial, Helvetica, sans-serif;
 }
 
 body {
   background-color: var(--background);
   color: var(--text);
-  height: 100%;
+  min-height: 100dvh;
   width: 100%;
-  padding: 0.5rem;
+  margin: 0 auto;
+  padding: 0.7rem;
 }
 
 main {
-  border: var(--black) solid 5px;
+  border: var(--black) solid 4px;
   height: 100%;
   width: 100%;
+  color: var(--primary);
+  background-color: var(--background);
+  padding: 0 0.7rem;
 }
 
 @media screen and (prefers-color-scheme: dark) {
   :root {
     --white: #ffffffff;
     --black: #000000ff;
-    --text: #d2d9dbff;
-    --background: #373e49ff;
-    --primary: #bbc7a4ff;
-    --secondary: #f4f4eeff;
-    --accent: #a26769ff;
+    --text: : #d2d9dbff; 
+    --background: #353839ff;
+    --primary: #d4b483ff;
+    --secondary: #45495bff;
+    --accent: #c1666bff;
   }
 }
 
