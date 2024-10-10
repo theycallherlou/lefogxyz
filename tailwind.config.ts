@@ -12,25 +12,29 @@ const config: Config = {
         black: '#000000ff',
         white: '#ffffffff',
         text: {
-          default: '#353839ff'
+          default: '#353839ff',
+          lighter: '#4f5469ff',
+          darker: '#3d4151ff'
         },
         background: {
-          default: '#d2d9dbff'
+          default: '#d2d9dbff',
+          lighter: '#dde2e4ff',
+          darker: '#c6cfd2ff'
         },
         primary: {
           default: '#45495bff',
-          lighter: '#595d6eff',
-          darker: '#303443ff'
+          lighter: '#4f5469ff',
+          darker: '#3d4151ff'
         },
         secondary: {
           default: '#d4b483ff',
-          lighter: '#ddbf9bff',
-          darker: '#b8966bff'
+          lighter: '#dbbf95ff',
+          darker: '#d0ac76ff'
         },
         accent: {
           default: '#c1666bff',
-          lighter: '#cc7f81ff',
-          darker: '#a34f54ff'
+          lighter: '#ca7d80ff',
+          darker: '#be6064ff'
         },
         dark: {
           black: {
@@ -47,18 +51,18 @@ const config: Config = {
           },
           primary: {
             default: '#d4b483ff',
-            lighter: '#ddbf9bff',
-            darker: '#b8966bff'
+            lighter: '#dbbf95ff',
+            darker: '#d0ac76ff'
           },
           secondary: {
             default: '#45495bff',
-            lighter: '#595d6eff',
-            darker: '#303443ff'
+            lighter: '#4f5469ff',
+            darker: '#3d4151ff'
           },
           accent: {
             default: '#c1666bff',
-            lighter: '#cc7f81ff',
-            darker: '#a34f54ff'
+            lighter: '#ca7d80ff',
+            darker: '#be6064ff'
           }
         }
       }

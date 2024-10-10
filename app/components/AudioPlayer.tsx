@@ -26,28 +26,26 @@ export default function AudioPlayer() {
     nextSong
   } = useAudio();
 
-  const handleSongChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     volumeChange(event);
   };
 
   return (
-    <div className="outline-2 outline-offset-4 outline-primary-darker border-2 border-primary-lighter backdrop-opacity-10 backdrop-blur-xl w-full max-w-md mx-auto rounded-lg shadow-lg flex flex-col justify-between items-center p-4 space-y-4 my-4">
-      {/* Song Title and Duration */}
-      <section className="w-full text-center">
+    <div className="w-full max-w-md mx-auto flex flex-col justify-between items-center p-2 space-y-4 my-4">
+      <section className="w-full text-center min-h-20">
         {playback && (
           <article className="flex flex-col items-center justify-center p-2">
-            <div className={`${karla.variable} text-lg font-semibold`}>
+            <div className={`${karla.variable} text-xl font-semibold`}>
               {song.title}
             </div>
-            <div className="text-sm text-gray-600">
+            <div className="text-base subpixel-antialiased">
               {elapsed} / {duration}
             </div>
           </article>
         )}
       </section>
 
-      {/* Control Buttons: Play, Previous, Next */}
-      <section className="grid grid-cols-3 gap-4 items-center justify-center w-full">
+      <section className="grid grid-cols-3 gap-4 items-center justify-center w-full min-h-20">
         <button
           onClick={previousSong}
           className="flex flex-col justify-center items-center"
@@ -61,9 +59,9 @@ export default function AudioPlayer() {
           className="flex flex-col justify-center items-center"
         >
           {playback ? (
-            <Pause weight="bold" className="h-8 w-8" />
+            <Pause weight="bold" className="h-8 w-8 " />
           ) : (
-            <Play weight="bold" className="h-8 w-8" />
+            <Play weight="bold" className="h-8 w-8 " />
           )}
           <span className="text-xs">{playback ? 'Pause' : 'Play'}</span>
         </button>
@@ -77,15 +75,15 @@ export default function AudioPlayer() {
         </button>
       </section>
 
-      <section className="flex justify-between items-center w-full space-x-4">
+      <section className="flex justify-evenly items-center w-full space-x-4">
         <button
           onClick={muteChange}
-          className="flex flex-col justify-center items-center"
+          className="flex flex-col justify-center items-center min-w-12"
         >
           {mute ? (
-            <SpeakerX weight="bold" className="h-4 md:h-6 w-4 md:w-6" />
+            <SpeakerX weight="bold" className="h-6 w-6" />
           ) : (
-            <SpeakerSlash weight="bold" className="h-4 md:h-6 w-4 md:w-6" />
+            <SpeakerSlash weight="bold" className="h-6 w-6" />
           )}
           <span className="text-xs">{mute ? 'Unmute' : 'Mute'}</span>
         </button>
@@ -96,7 +94,8 @@ export default function AudioPlayer() {
             min="0"
             max="1"
             step="0.01"
-            value="0.5"
+            value={volume}
+            onChange={handleVolumeChange}
             className="volume-control"
           />
         </div>

@@ -20,7 +20,7 @@ export default function Logo() {
   }, []);
 
   return (
-    <div>
+    <div className="border-2 border-red-800">
       {colorScheme === 'dark' ? (
         <Image
           src="/images/logo_dark.png"
