@@ -12,9 +12,9 @@ const config: Config = {
         black: '#000000ff',
         white: '#ffffffff',
         text: {
-          default: '#353839ff',
-          lighter: '#4f5469ff',
-          darker: '#3d4151ff'
+          default: '#333333ff',
+          lighter: '#3d3d3dff',
+          darker: '#292929ff'
         },
         background: {
           default: '#d2d9dbff',
@@ -44,10 +44,14 @@ const config: Config = {
             default: '#ffffffff'
           },
           text: {
-            default: '#d2d9dbff'
+            default: '#d2d9dbff',
+            lighter: '#dde2e4ff',
+            darker: '#c6cfd2ff'
           },
           background: {
-            default: '#353839ff'
+            default: '#333333ff',
+            lighter: '#3d3d3dff',
+            darker: '#292929ff'
           },
           primary: {
             default: '#d4b483ff',
