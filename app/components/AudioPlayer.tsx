@@ -4,7 +4,6 @@ import AudioControls from './AudioControls';
 import { playlist } from '@/data';
 import { ITrack } from '@/types';
 import './AudioPlayer.css';
-import useAudio from '@/hooks/useAudio';
 import { useAudioContext } from '@/contexts/AudioContext';
 
 export default function AudioPlayer() {
@@ -39,7 +38,7 @@ export default function AudioPlayer() {
       <section
         className={`mt-4 w-full ${isAudioPlayerVisible ? 'visible' : 'hidden'}`}
       >
-        <AudioControls isVisible={isAudioPlayerVisible} />
+        <AudioControls />
       </section>
       <button
         onClick={toggleAudioPlayer}

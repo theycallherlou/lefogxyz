@@ -1,5 +1,4 @@
 'use client';
-import useAudio from '@/hooks/useAudio';
 import {
   Pause,
   Play,
@@ -12,7 +11,7 @@ import { karla } from '@/style/fonts';
 import './AudioPlayer.css';
 import { useAudioContext } from '@/contexts/AudioContext';
 
-export default function AudioControls({ isVisible }: { isVisible: boolean }) {
+export default function AudioControls() {
   const {
     song,
     volume,

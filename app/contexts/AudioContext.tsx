@@ -55,37 +55,6 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
     )}`;
   };
 
-  const loadNewSong = useCallback(
-    (src: string) => {
-      if (songRef.current) {
-        songRef.current.unload();
-      }
-
-      songRef.current = new Howl({
-        src: [song.url],
-        html5: true,
-        preload: 'metadata',
-        autoplay: false,
-        loop: false,
-        volume: volume,
-        onload: () => {
-          const durationSeconds = songRef.current?.duration() as number;
-          setDuration(formatTime(durationSeconds));
-        },
-        onplay: () => {
-          setPlayback(true);
-        },
-        onpause: () => {
-          setPlayback(false);
-        },
-        onend: () => {
-          handleNextSong();
-        }
-      });
-    },
-    [volume]
-  );
-
   const handlePlayPause = useCallback(async () => {
     if (!songRef.current) return;
 
@@ -125,33 +94,29 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
 
   const handleSongChange = useCallback(
     (newIndex: number) => {
-      // Unload any previous Howl instance
       if (songRef.current) {
         songRef.current.unload();
       }
 
-      // Update the currentIndex to the clicked song
       setCurrentIndex(newIndex);
 
-      // Load and play the new song
       const selectedSong = playlist[newIndex].url;
       const newSong = new Howl({
         src: [selectedSong],
         html5: true,
         volume: volume,
         onplay: () => {
-          setPlayback(true); // Set playback to true
+          setPlayback(true);
         },
         onend: () => {
-          setPlayback(false); // Set playback to false when the song ends
+          setPlayback(false);
         }
       });
 
-      // Assign the new Howl instance to songRef and play it
       songRef.current = newSong;
       songRef.current.play();
     },
-    [volume, playlist] // Dependencies
+    [volume]
   );
 
   const handlePreviousSong = useCallback(() => {
@@ -163,6 +128,37 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
     const nextIndex = currentIndex < playlist.length - 1 ? currentIndex + 1 : 0;
     handleSongChange(nextIndex);
   }, [currentIndex, handleSongChange]);
+
+  const loadNewSong = useCallback(
+    (src: string) => {
+      if (songRef.current) {
+        songRef.current.unload();
+      }
+
+      songRef.current = new Howl({
+        src: [song.url],
+        html5: true,
+        preload: 'metadata',
+        autoplay: false,
+        loop: false,
+        volume: volume,
+        onload: () => {
+          const durationSeconds = songRef.current?.duration() as number;
+          setDuration(formatTime(durationSeconds));
+        },
+        onplay: () => {
+          setPlayback(true);
+        },
+        onpause: () => {
+          setPlayback(false);
+        },
+        onend: () => {
+          handleNextSong();
+        }
+      });
+    },
+    [volume, handleNextSong, song.url]
+  );
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout | null = null;
@@ -187,6 +183,7 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
         song,
         currentIndex,
         playback,
+        loadNewSong,
         handleVolumeChange,
         handleMuteChange,
         handlePlayPause,
