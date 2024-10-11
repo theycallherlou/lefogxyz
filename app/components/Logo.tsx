@@ -20,7 +20,7 @@ export default function Logo() {
   }, []);
 
   return (
-    <div className="border-2 border-red-800">
+    <div className="w-full flex justify-center items-center">
       {colorScheme === 'dark' ? (
         <Image
           src="/images/logo_dark.png"

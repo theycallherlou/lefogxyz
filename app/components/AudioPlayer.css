@@ -1,8 +1,16 @@
+.control-label {
+  opacity: 0;
+}
+
+.control-btn:hover .control-label {
+  opacity: 1;
+}
+
 #volume,
 input[type='range'] {
   -webkit-appearance: none;
   appearance: none;
-  width: 100%;
+  width: 70%;
   height: 0.95rem;
   background-color: var(--secondary-100);
   background-image: linear-gradient(
@@ -19,7 +27,7 @@ input[type='range'] {
 
 #volume::-webkit-slider-runnable-track,
 input[type='range']::-webkit-slider-runnable-track {
-  width: 100%;
+  width: 70%;
   height: 1rem;
   background: transparent;
   border: 1px var(--text-100) solid;
@@ -59,17 +67,4 @@ input[type='range']::-moz-range-thumb {
   background: transparent;
   border-color: transparent;
   color: transparent;
-}
-
-.audio-player-container {
-  border: var(--text-200) 2px solid;
-  border-radius: 0.5rem;
-}
-
-.control-label {
-  opacity: 0;
-}
-
-.control-btn:hover .control-label {
-  opacity: 1;
 }

@@ -11,21 +11,18 @@ export default function AudioPlayer() {
   };
 
   return (
-    <div className="player-card border-2 border-blue-300 h-full w-full flex flex-col justify-end items-center p-2">
+    <div className="h-full w-full flex flex-col justify-end items-center p-2">
+      <section
+        className={`mt-4 w-full ${isAudioPlayerVisible ? 'visible' : 'hidden'}`}
+      >
+        <AudioControls isVisible={isAudioPlayerVisible} />
+      </section>
       <button
         onClick={toggleAudioPlayer}
         className="toggle-button px-4 py-2 rounded transition-colors duration-300 "
       >
         {isAudioPlayerVisible ? 'Hide Audio Player' : 'Show Audio Player'}
       </button>
-
-      <div
-        className={`audio-player-container mt-4 w-full ${
-          isAudioPlayerVisible ? 'visible' : 'hidden'
-        }`}
-      >
-        <AudioControls isVisible={isAudioPlayerVisible} />
-      </div>
     </div>
   );
 }

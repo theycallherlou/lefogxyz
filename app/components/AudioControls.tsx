@@ -31,7 +31,7 @@ export default function AudioControls({ isVisible }: { isVisible: boolean }) {
   };
 
   return (
-    <div className="player-container bg-text-lighter rounded-lg shadow-lg w-full max-w-md mx-auto flex flex-col justify-between items-center p-2 space-y-4 my-4">
+    <div className="bg-text-lighter rounded-lg shadow-lg w-full max-w-md mx-auto flex flex-col justify-between items-center p-2 space-y-4 my-4">
       <section className="w-full text-center min-h-20">
         {playback && (
           <article className="flex flex-col items-center justify-center p-2">
@@ -95,7 +95,7 @@ export default function AudioControls({ isVisible }: { isVisible: boolean }) {
             {mute ? 'Unmute' : 'Mute'}
           </span>
         </button>
-        <div className="relative w-full h-full flex justify-end items-center">
+        <div className="relative w-full h-full flex justify-end items-center p-4">
           <input
             id="volume"
             type="range"
