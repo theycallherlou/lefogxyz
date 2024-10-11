@@ -10,24 +10,27 @@ import {
 } from '@phosphor-icons/react';
 import { karla } from '@/style/fonts';
 import './AudioPlayer.css';
+import { useAudioContext } from '@/contexts/AudioContext';
 
 export default function AudioControls({ isVisible }: { isVisible: boolean }) {
   const {
     song,
-    play,
     volume,
-    volumeChange,
     mute,
-    muteChange,
     playback,
     elapsed,
     duration,
-    previousSong,
-    nextSong
-  } = useAudio();
+    handlePlayPause,
+    handleVolumeChange,
+    handleMuteChange,
+    handlePreviousSong,
+    handleNextSong
+  } = useAudioContext() ?? {};
 
-  const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    volumeChange(event);
+  const volumeChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (handleVolumeChange) {
+      handleVolumeChange(event);
+    }
   };
 
   return (
@@ -36,7 +39,7 @@ export default function AudioControls({ isVisible }: { isVisible: boolean }) {
         {playback && (
           <article className="flex flex-col items-center justify-center p-2">
             <div className={`${karla.variable} text-xl font-semibold`}>
-              {song.title}
+              {song?.title}
             </div>
             <div className="text-base subpixel-antialiased">
               {elapsed} / {duration}
@@ -47,7 +50,7 @@ export default function AudioControls({ isVisible }: { isVisible: boolean }) {
 
       <section className="grid grid-cols-3 gap-4 items-center justify-center w-full min-h-20">
         <button
-          onClick={previousSong}
+          onClick={handlePreviousSong}
           className="control-btn flex flex-col justify-center items-center"
         >
           <SkipBack weight="bold" className="h-6 w-6" />
@@ -57,7 +60,7 @@ export default function AudioControls({ isVisible }: { isVisible: boolean }) {
         </button>
 
         <button
-          onClick={play}
+          onClick={handlePlayPause}
           className="control-btn flex flex-col justify-center items-center"
         >
           {playback ? (
@@ -71,7 +74,7 @@ export default function AudioControls({ isVisible }: { isVisible: boolean }) {
         </button>
 
         <button
-          onClick={nextSong}
+          onClick={handleNextSong}
           className="control-btn flex flex-col justify-center items-center"
         >
           <SkipForward weight="bold" className="h-6 w-6" />
@@ -83,7 +86,7 @@ export default function AudioControls({ isVisible }: { isVisible: boolean }) {
 
       <section className="flex justify-evenly items-center w-full space-x-4">
         <button
-          onClick={muteChange}
+          onClick={handleMuteChange}
           className="control-btn flex flex-col justify-center items-center min-w-12"
         >
           {mute ? (
@@ -103,10 +106,10 @@ export default function AudioControls({ isVisible }: { isVisible: boolean }) {
             max="1"
             step="0.01"
             value={volume}
-            onChange={handleVolumeChange}
+            onChange={volumeChangeHandler}
             className="volume-control"
             style={{
-              backgroundSize: `${(volume * 100).toFixed(2)}% 100%`
+              backgroundSize: `${((volume ?? 0) * 100).toFixed(2)}% 100%`
             }}
           />
         </div>

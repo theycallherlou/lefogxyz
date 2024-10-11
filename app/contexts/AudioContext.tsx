@@ -1,19 +1,47 @@
 'use client';
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { Howl, Howler } from 'howler';
-import { playlist } from '@/data';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+  useCallback
+} from 'react';
+import { Howl } from 'howler';
+import { AudioContextType } from '@/types';
 
-export default function useAudio() {
-  const [playback, setPlayback] = useState<boolean>(false);
+const AudioContext = createContext<AudioContextType | null>(null);
+
+const playlist = [
+  {
+    id: 0,
+    title: 'They Call Her Lou',
+    album: 'unreleased',
+    artist: 'lefog',
+    url: '/audio/lou.mp3',
+    duration: '02:35'
+  },
+  {
+    id: 1,
+    title: 'Draw From the Sleep Well',
+    album: 'unreleased',
+    artist: 'lefog',
+    url: '/audio/well.mp3',
+    duration: '03:45'
+  }
+];
+
+export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [playback, setPlayback] = useState<boolean>(false);
   const [volume, setVolume] = useState<number>(0.5);
   const [mute, setMute] = useState<boolean>(false);
   const [elapsed, setElapsed] = useState<string>('00:00');
   const [duration, setDuration] = useState<string>('00:00');
 
-  const song = playlist[currentIndex];
-
   const songRef = useRef<Howl | null>(null);
+
+  const song = playlist[currentIndex];
 
   const formatTime = (seconds: number): string => {
     if (!Number.isFinite(seconds) || seconds < 0) {
@@ -34,7 +62,7 @@ export default function useAudio() {
       }
 
       songRef.current = new Howl({
-        src,
+        src: [song.url],
         html5: true,
         preload: 'metadata',
         autoplay: false,
@@ -97,19 +125,33 @@ export default function useAudio() {
 
   const handleSongChange = useCallback(
     (newIndex: number) => {
-      setCurrentIndex(newIndex);
-      setElapsed('00:00');
-      setPlayback(false);
-      loadNewSong(playlist[newIndex].url);
-
+      // Unload any previous Howl instance
       if (songRef.current) {
-        songRef.current?.play();
-        setPlayback(true);
-        const durationSeconds = songRef.current?.duration() as number;
-        setDuration(formatTime(durationSeconds));
+        songRef.current.unload();
       }
+
+      // Update the currentIndex to the clicked song
+      setCurrentIndex(newIndex);
+
+      // Load and play the new song
+      const selectedSong = playlist[newIndex].url;
+      const newSong = new Howl({
+        src: [selectedSong],
+        html5: true,
+        volume: volume,
+        onplay: () => {
+          setPlayback(true); // Set playback to true
+        },
+        onend: () => {
+          setPlayback(false); // Set playback to false when the song ends
+        }
+      });
+
+      // Assign the new Howl instance to songRef and play it
+      songRef.current = newSong;
+      songRef.current.play();
     },
-    [loadNewSong, playlist]
+    [volume, playlist] // Dependencies
   );
 
   const handlePreviousSong = useCallback(() => {
@@ -138,28 +180,36 @@ export default function useAudio() {
     };
   }, [playback]);
 
-  useEffect(() => {
-    loadNewSong(song.url);
+  return (
+    <AudioContext.Provider
+      value={{
+        playlist,
+        song,
+        currentIndex,
+        playback,
+        handleVolumeChange,
+        handleMuteChange,
+        handlePlayPause,
+        handleSongChange,
+        handlePreviousSong,
+        handleNextSong,
+        elapsed,
+        duration,
+        volume,
+        setVolume,
+        mute,
+        setMute
+      }}
+    >
+      {children}
+    </AudioContext.Provider>
+  );
+};
 
-    return () => {
-      songRef.current?.unload();
-    };
-  }, [song.url, loadNewSong]);
-
-  return {
-    song,
-    handlePlayPause,
-    volume,
-    handleVolumeChange,
-    mute,
-    handleMuteChange,
-    playback,
-    elapsed,
-    duration,
-    handlePreviousSong,
-    handleNextSong,
-    currentIndex,
-    handleSongChange,
-    formatTime
-  };
-}
+export const useAudioContext = () => {
+  const context = useContext(AudioContext);
+  if (context === undefined) {
+    throw new Error('useAudioContext must be used within a provider');
+  }
+  return context;
+};

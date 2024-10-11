@@ -1,6 +1,8 @@
+'use client';
 import AudioPlayer from '@/components/AudioPlayer';
 import { barlowLight } from '@/style/fonts';
 import Logo from '@/components/Logo';
+import { AudioProvider } from '@/contexts/AudioContext';
 
 export default function Home() {
   return (
@@ -11,7 +13,9 @@ export default function Home() {
         <Logo />
       </section>
       <section className="w-full max-w-screen-sm mx-auto min-h-72 flex-1">
-        <AudioPlayer />
+        <AudioProvider>
+          <AudioPlayer />
+        </AudioProvider>
       </section>
     </div>
   );
