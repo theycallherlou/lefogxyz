@@ -19,10 +19,12 @@ export default function AudioPlayer() {
         {isAudioPlayerVisible ? 'Hide Audio Player' : 'Show Audio Player'}
       </button>
 
-      <div className="audio-player-container mt-4 w-full">
-        {isAudioPlayerVisible && (
-          <AudioControls isVisible={isAudioPlayerVisible} />
-        )}
+      <div
+        className={`audio-player-container mt-4 w-full ${
+          isAudioPlayerVisible ? 'visible' : 'hidden'
+        }`}
+      >
+        <AudioControls isVisible={isAudioPlayerVisible} />
       </div>
     </div>
   );
