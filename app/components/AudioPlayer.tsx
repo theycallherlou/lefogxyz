@@ -11,7 +11,7 @@ export default function AudioPlayer() {
   };
 
   return (
-    <div className="player-card flex flex-col items-center p-4">
+    <div className="player-card border-2 border-blue-300 h-full w-full flex flex-col justify-end items-center p-2">
       <button
         onClick={toggleAudioPlayer}
         className="toggle-button px-4 py-2 rounded transition-colors duration-300 "

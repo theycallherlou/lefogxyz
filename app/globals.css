@@ -43,11 +43,12 @@ body {
   width: 100%;
   margin: 0 auto;
   padding: 2rem;
+  border: yellowgreen solid 2px;
 }
 
 main {
   border: var(--black) solid 4px;
-  height: 100dvh;
+  height: 100%;
   width: 100%;
   color: var(--text-50);
   background-color: var(--background-100);
