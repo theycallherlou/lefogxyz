@@ -61,7 +61,7 @@ input[type='range']::-moz-range-thumb {
   color: transparent;
 }
 
-.player-container {
+.audio-player-container {
   border: var(--text-200) 2px solid;
   border-radius: 0.5rem;
 }
