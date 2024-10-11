@@ -136,7 +136,7 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
       }
 
       songRef.current = new Howl({
-        src: [song.url],
+        src: [src],
         html5: true,
         preload: 'metadata',
         autoplay: false,
