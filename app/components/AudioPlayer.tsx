@@ -1,92 +1,51 @@
 'use client';
-import useAudio from '@/hooks/useAudio';
-import {
-  Pause,
-  Play,
-  SkipBack,
-  SkipForward,
-  SpeakerSlash,
-  SpeakerX
-} from '@phosphor-icons/react';
+import { useState } from 'react';
+import AudioControls from './AudioControls';
+import { playlist } from '@/data';
+import { ITrack } from '@/types';
 import './AudioPlayer.css';
-export default function AudioPlayer() {
-  const {
-    song,
-    play,
-    volume,
-    volumeChange,
-    mute,
-    muteChange,
-    playback,
-    elapsed,
-    duration,
-    previousSong,
-    nextSong
-  } = useAudio();
+import { useAudioContext } from '@/contexts/AudioContext';
 
-  const handleSongChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    volumeChange(event);
+export default function AudioPlayer() {
+  const { currentIndex, handleSongChange } = useAudioContext() ?? {};
+  const [isAudioPlayerVisible, setIsAudioPlayerVisible] = useState(true);
+
+  const toggleAudioPlayer = () => {
+    setIsAudioPlayerVisible((prevState: boolean) => !prevState);
   };
 
   return (
-    <div className="h-full w-full flex flex-col justify-around items-center p-2">
-      <section className="min-h-40 w-full flex flex-col justify-evenly items-center text-center p-2">
-        {playback && (
-          <article className="">
-            <div className="font-semibold subpixel-antialiased">{`${song.title}`}</div>
-            <div className="font-normal subpixel-antialiased">{`${elapsed} / ${duration}`}</div>
-          </article>
-        )}
+    <div className="h-full w-full flex flex-col justify-end items-center p-2">
+      <section className="w-full flex flex-col justify-end items-center p-2">
+        <ul className="list-none p-0">
+          {playlist.map((track: ITrack, index: number) => (
+            <li
+              key={track.id}
+              className={`${
+                currentIndex === index ? 'active' : ''
+              } my-2 cursor-pointer`}
+            >
+              <button
+                className="bg-none border-none text-base cursor-pointer p-2 w-full text-left"
+                onClick={() => handleSongChange && handleSongChange(index)}
+              >
+                {track.title} - {track.album} - {track.artist}
+              </button>
+            </li>
+          ))}
+        </ul>
       </section>
-
-      <section className="w-full flex justify-between items-center p-2">
-        <div className="icon-container">
-          <button onClick={play} className="icon-button">
-            {playback ? <Pause weight="duotone" /> : <Play weight="duotone" />}
-          </button>
-          <label className="icon-label" htmlFor="play">
-            {playback ? 'Pause' : 'Play'}
-          </label>
-        </div>
-
-        <div className="icon-container">
-          <button onClick={previousSong} className="icon-button">
-            <SkipBack weight="duotone" />
-          </button>
-          <label className="icon-label">Previous</label>
-        </div>
-
-        <div className="icon-container">
-          <button onClick={nextSong} className="icon-button">
-            <SkipForward weight="duotone" />
-          </button>
-          <label className="icon-label">Next</label>
-        </div>
-
-        <div className="icon-container">
-          <button onClick={muteChange} className="icon-button">
-            {mute ? (
-              <SpeakerX weight="duotone" />
-            ) : (
-              <SpeakerSlash weight="duotone" />
-            )}
-            <label className="icon-label">{mute ? 'Unmute' : 'Mute'}</label>
-          </button>
-        </div>
-
-        <div className="icon-container">
-          <input
-            id="volume"
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value={volume}
-            onChange={handleSongChange}
-          />
-          <label className="icon-label">Volume</label>
-        </div>
+      <section
+        className={`mt-4 w-full ${isAudioPlayerVisible ? 'visible' : 'hidden'}`}
+      >
+        <AudioControls />
       </section>
+      <button
+        onClick={toggleAudioPlayer}
+        className="toggle-button px-4 py-2 rounded transition-colors duration-300 "
+      >
+        {isAudioPlayerVisible ? 'Hide Audio Player' : 'Show Audio Player'}
+      </button>
     </div>
   );
 }

@@ -1,32 +1,70 @@
-.icon-container {
-  position: relative;
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.icon-label {
-  height: 1.5rem;
-  width: 3rem;
-  position: absolute;
-  top: 80%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 0.75rem;
-  text-align: center;
+.control-label {
   opacity: 0;
-  transition: opacity 0.2s ease-in-out;
 }
 
-.icon-container:hover .icon-label {
+.control-btn:hover .control-label {
   opacity: 1;
+}
+
+#volume,
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 70%;
+  height: 0.95rem;
+  background-color: var(--secondary-100);
+  background-image: linear-gradient(
+    to right,
+    var(--primary-50),
+    var(--primary-200)
+  );
+  background-repeat: no-repeat;
+  border-radius: 0.375rem;
+  outline: none;
+  border: 1px var(--text-100) solid;
+  margin: 0;
+}
+
+#volume::-webkit-slider-runnable-track,
+input[type='range']::-webkit-slider-runnable-track {
+  width: 70%;
+  height: 1rem;
+  background: transparent;
+  border: 1px var(--text-100) solid;
+  border-radius: 0.5rem;
+}
+
+#volume::-webkit-slider-thumb,
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 1rem;
+  width: 1rem;
+  background-color: var(--text-200);
+  border: var(--text-50) 2px solid;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#volume::-moz-range-track,
+input[type='range']::-moz-range-track {
+  background: transparent;
+  border: none;
+}
+
+#volume::-moz-range-thumb,
+input[type='range']::-moz-range-thumb {
+  height: 1rem;
+  width: 1rem;
+  background-color: var(--text-100);
+  border: var(--text-50) 2px solid;
+  border-radius: 50%;
   cursor: pointer;
 }
 
-.icon-button svg {
-  width: 1.2rem;
-  height: 1.2rem;
+.volume-control::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
 }

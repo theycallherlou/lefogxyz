@@ -1,28 +1,21 @@
-import Image from 'next/image';
+'use client';
 import AudioPlayer from '@/components/AudioPlayer';
 import { barlowLight } from '@/style/fonts';
+import Logo from '@/components/Logo';
+import { AudioProvider } from '@/contexts/AudioContext';
 
 export default function Home() {
   return (
     <div
-      className={`${barlowLight.className} min-h-screen w-full max-w-screen-lg mx-auto p-2`}
+      className={`${barlowLight.className} h-full w-full max-w-screen-lg mx-auto flex flex-col justify-start items-center p-2`}
     >
-      <section className="h-full w-full mx-auto flex flex-col justify-between items-center p-2">
-        <div className="w-full mx-auto flex justify-center items-center p-2">
-          <Image
-            src="/logo/logo_steel.png"
-            alt="logo"
-            width={500}
-            height={500}
-            className="logo"
-            title="logo for le fog"
-            priority
-          />
-        </div>
-        <h1 className="text-center text-3xl">ELECTRIFIED METER</h1>
-        <div className="w-full max-w-screen-lg mx-auto min-h-40 mb-6">
+      <section className="w-full flex justify-center items-center flex-0">
+        <Logo />
+      </section>
+      <section className="w-full max-w-screen-sm mx-auto min-h-72 flex-1">
+        <AudioProvider>
           <AudioPlayer />
-        </div>
+        </AudioProvider>
       </section>
     </div>
   );
