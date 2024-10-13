@@ -9,64 +9,68 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        black: '#000000ff',
         white: '#ffffffff',
+        black: '#000000ff',
         text: {
-          default: '#333333ff',
-          lighter: '#3d3d3dff',
-          darker: '#292929ff'
+          100: '#474747ff',
+          200: '#3d3d3dff',
+          300: '#333333ff',
+          400: '#292929ff'
         },
         background: {
-          default: '#d2d9dbff',
-          lighter: '#dde2e4ff',
-          darker: '#c6cfd2ff'
+          100: '#f4f5f6ff',
+          200: '#e8ecedff',
+          300: '#dde2e4ff',
+          400: '#d2d8d8ff'
         },
         primary: {
-          default: '#45495bff',
-          lighter: '#4f5469ff',
-          darker: '#3d4151ff'
+          100: '#4f5469ff',
+          200: '#45495bff',
+          300: '#3d4151ff',
+          400: '#353846ff'
         },
         secondary: {
-          default: '#d4b483ff',
-          lighter: '#dbbf95ff',
-          darker: '#d0ac76ff'
+          100: '#dbbf95ff',
+          200: '#d4b483ff',
+          300: '#d0ac76ff',
+          400: '#cba367ff'
         },
         accent: {
-          default: '#c1666bff',
-          lighter: '#ca7d80ff',
-          darker: '#be6064ff'
+          100: '#ca7d80ff',
+          200: '#c1666bff',
+          300: '#be6064ff',
+          400: '#b85156ff'
         },
         dark: {
-          black: {
-            default: '#000000ff'
-          },
-          white: {
-            default: '#ffffffff'
-          },
           text: {
-            default: '#d2d9dbff',
-            lighter: '#dde2e4ff',
-            darker: '#c6cfd2ff'
+            100: '#f4f5f6ff',
+            200: '#e8ecedff',
+            300: '#dde2e4ff',
+            400: '#d2d8d8ff'
           },
           background: {
-            default: '#333333ff',
-            lighter: '#3d3d3dff',
-            darker: '#292929ff'
+            100: '#474747ff',
+            200: '#3d3d3dff',
+            300: '#333333ff',
+            400: '#292929ff'
           },
           primary: {
-            default: '#d4b483ff',
-            lighter: '#dbbf95ff',
-            darker: '#d0ac76ff'
+            100: '#dbbf95ff',
+            200: '#d4b483ff',
+            300: '#d0ac76ff',
+            400: '#cba367ff'
           },
           secondary: {
-            default: '#45495bff',
-            lighter: '#4f5469ff',
-            darker: '#3d4151ff'
+            100: '#4f5469ff',
+            200: '#45495bff',
+            300: '#3d4151ff',
+            400: '#353846ff'
           },
           accent: {
-            default: '#c1666bff',
-            lighter: '#ca7d80ff',
-            darker: '#be6064ff'
+            100: '#ca7d80ff',
+            200: '#c1666bff',
+            300: '#be6064ff',
+            400: '#b85156ff'
           }
         }
       }

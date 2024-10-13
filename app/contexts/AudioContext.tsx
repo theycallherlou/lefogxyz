@@ -55,12 +55,12 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
     )}`;
   };
 
-  const handlePlayPause = useCallback(async () => {
+  const handlePlayPause = useCallback(() => {
     if (!songRef.current) return;
 
     if (Howler.ctx.state === 'suspended') {
       try {
-        await Howler.ctx.resume();
+        Howler.ctx.resume();
       } catch (error) {
         console.error(
           `There was an error resuming the audio context: ${error}`
@@ -175,6 +175,10 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
       }
     };
   }, [playback]);
+
+  useEffect(() => {
+    loadNewSong(song.url);
+  }, [song.url, loadNewSong]);
 
   return (
     <AudioContext.Provider

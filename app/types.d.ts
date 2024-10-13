@@ -15,7 +15,7 @@ interface AudioContextType {
   loadNewSong: (src: string) => void;
   handleVolumeChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleMuteChange: () => void;
-  handlePlayPause: () => Promise<void>;
+  handlePlayPause: () => void;
   handleSongChange: (newIndex: number) => void;
   handlePreviousSong: () => void;
   handleNextSong: () => void;
