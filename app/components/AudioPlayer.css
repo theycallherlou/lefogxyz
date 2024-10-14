@@ -35,6 +35,9 @@
   font-size: small;
   background-color: var(--background-100);
   background-size: var(--volume-percentage) 100%;
+  position: absolute;
+  left: 0.5rem;
+  bottom: 0.5rem;
 }
 
 .toggle-button:hover {
@@ -102,4 +105,14 @@ input[type='range']::-ms-track {
   background: transparent;
   border-color: transparent;
   color: transparent;
+}
+
+@media screen and (max-width: 678px) {
+  .toggle-button {
+    position: absolute;
+    left: 0rem;
+    bottom: 0rem;
+    padding: 0.2rem 0.6rem;
+    font-size: small;
+  }
 }

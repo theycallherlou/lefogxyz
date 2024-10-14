@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { barlowLight, barlowRegular, barlowMedium } from '@style/fonts';
+import './colors.css';
 import './globals.css';
 
 export const metadata: Metadata = {

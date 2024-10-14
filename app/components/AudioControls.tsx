@@ -11,6 +11,7 @@ import {
 import { karla } from '@/style/fonts';
 import './AudioPlayer.css';
 import { useAudioContext } from '@/contexts/AudioContext';
+import AudioNowPlaying from '@/components/AudioNowPlaying';
 
 export default function AudioControls() {
   const {
@@ -48,20 +49,8 @@ export default function AudioControls() {
   };
 
   return (
-    <div className="w-full max-w-sm mx-auto flex flex-col justify-between items-center">
-      <section className="w-full text-center min-h-20">
-        {playback && (
-          <article className="flex flex-col items-center justify-center">
-            <div className={`${karla.variable} text-xl font-semibold`}>
-              {song?.title}
-            </div>
-            <div className="text-base subpixel-antialiased">
-              {elapsed} / {duration}
-            </div>
-          </article>
-        )}
-      </section>
-
+    <div className="w-full max-w-sm mx-auto flex flex-col justify-between items- my-4">
+      <AudioNowPlaying />
       <section className="w-full flex justify-between min-w-40 mx-auto">
         <button onClick={handlePreviousSong} className="control-btn">
           <SkipBack weight="bold" className="h-6 min-w-6 mx-auto" />
