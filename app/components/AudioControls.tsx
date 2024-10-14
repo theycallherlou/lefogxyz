@@ -8,18 +8,14 @@ import {
   SpeakerNone,
   SpeakerSlash
 } from '@phosphor-icons/react';
-import { karla } from '@/style/fonts';
 import './AudioPlayer.css';
 import { useAudioContext } from '@/contexts/AudioContext';
 
 export default function AudioControls() {
   const {
-    song,
     volume,
     mute,
     playback,
-    elapsed,
-    duration,
     handlePlayPause,
     handleVolumeChange,
     handleMuteChange,

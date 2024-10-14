@@ -40,7 +40,7 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
   const [duration, setDuration] = useState<string>('00:00');
 
   const songRef = useRef<Howl | null>(null);
-  const volumeSliderRef = useRef<HTMLInputElement>(null); 
+  const volumeSliderRef = useRef<HTMLInputElement>(null);
   const song = playlist[currentIndex];
 
   const formatTime = (seconds: number): string => {
@@ -157,7 +157,7 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
         }
       });
     },
-    [volume, handleNextSong, song.url]
+    [volume, handleNextSong]
   );
 
   useEffect(() => {

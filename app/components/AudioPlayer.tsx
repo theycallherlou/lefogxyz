@@ -3,11 +3,9 @@ import { useState } from 'react';
 import AudioControls from './AudioControls';
 import AudioPlaylist from './AudioPlaylist';
 import './AudioPlayer.css';
-import { useAudioContext } from '@/contexts/AudioContext';
 import AudioNowPlaying from '@/components/AudioNowPlaying';
 
 export default function AudioPlayer() {
-  const { currentIndex, handleSongChange } = useAudioContext() ?? {};
   const [isAudioPlayerVisible, setIsAudioPlayerVisible] = useState(true);
 
   const toggleAudioPlayer = () => {
