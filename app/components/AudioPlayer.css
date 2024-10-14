@@ -1,22 +1,24 @@
-#input {
-  --volume-percentage: `${((volume ?? 0) * 100).toFixed(2)}%`
-}
 .control-btn {
-  min-width: 5rem;
-  flex: display;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  min-width: 4rem;
 }
 
 .control-label {
   opacity: 0;
-  min-width: 100%;
   font-weight: 600;
 }
 
 .control-btn:hover .control-label {
   opacity: 1;
+}
+
+.playlist {
+  width: 100%;
+  height: auto;
+  border: none;
+  background: none;
+  text-align: left;
+  font-weight: 600;
+  color: var(--white);
 }
 
 .toggle-button {
@@ -33,39 +35,43 @@
   transition: transform 0.2s ease-in-out background-color 0.7s ease-in-out
     box-shadow 0.7s ease-in-out;
   font-size: small;
-  background-color: var(--background-100);
-  background-size: var(--volume-percentage) 100%;
+  background-color: var(--secondary-100);
   position: absolute;
   left: 0.5rem;
   bottom: 0.5rem;
 }
 
 .toggle-button:hover {
-  background-color: var--(background-100);
+  background-color: var--(secondary-200);
   box-shadow: 0.25px 0.25px 0px 0.5px var(--text-200);
 }
 
 .toggle-button:active {
   transform: translateY(3px);
-  background-color: var(--background-300);
+  background-color: var(--secondary-300);
 }
+
 #volume,
 input[type='range'] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
   height: 1rem;
-  background-color: var(--secondary-100); 
+  background-color: var(--secondary-100);
   border-radius: 50px;
-  border: 2px solid var(--accent-200);
-  background-image: linear-gradient(to right, var(--primary-100), var(--primary-200));
+  border: none;
+  background-image: linear-gradient(
+    to right,
+    var(--primary-100),
+    var(--primary-200)
+  );
   background-repeat: no-repeat;
 }
- 
+
 #volume::-webkit-slider-runnable-track,
 input[type='range']::-webkit-slider-runnable-track {
   width: 100%;
-  height: 1rem; 
+  height: 1rem;
   background: transparent;
   border-radius: 50px;
 }
@@ -81,8 +87,8 @@ input[type='range']::-webkit-slider-thumb {
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-} */
- 
+}
+
 #volume::-moz-range-track,
 input[type='range']::-moz-range-track {
   background: transparent;

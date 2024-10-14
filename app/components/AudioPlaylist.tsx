@@ -13,7 +13,7 @@ export default function AudioPlaylist() {
             className={`${currentIndex === index ? 'active' : ''}`}
           >
             <button
-              className="bg-none border-none w-full text-left text-xs"
+              className="text-xs sm:text-sm md:text-base lg:text-lg subpixel-antialiased"
               onClick={() => handleSongChange && handleSongChange(index)}
             >
               {track.title} | {track.album} | {track.artist}

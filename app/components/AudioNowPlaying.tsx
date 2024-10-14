@@ -6,13 +6,15 @@ export default function AudioNowPlaying() {
   const { song, playback, elapsed, duration } = useAudioContext() ?? {};
 
   return (
-    <section className="w-full text-center min-h-20">
+    <section className="w-full text-center min-h-10">
       {playback && (
-        <article className="flex flex-col items-center justify-center">
-          <div className={`${karla.variable} text-xl font-semibold`}>
+        <article className="text-white subpixel-antialiased">
+          <div
+            className={`${karla.variable} text-sm sm:text-base md:text-lg lg:text-xl`}
+          >
             {song?.title}
           </div>
-          <div className="text-base subpixel-antialiased">
+          <div className="text-xs sm:text-sm md:text-base lg:text-lg">
             {elapsed} / {duration}
           </div>
         </article>

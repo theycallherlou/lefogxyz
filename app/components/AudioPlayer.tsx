@@ -4,6 +4,7 @@ import AudioControls from './AudioControls';
 import AudioPlaylist from './AudioPlaylist';
 import './AudioPlayer.css';
 import { useAudioContext } from '@/contexts/AudioContext';
+import AudioNowPlaying from '@/components/AudioNowPlaying';
 
 export default function AudioPlayer() {
   const { currentIndex, handleSongChange } = useAudioContext() ?? {};
@@ -15,16 +16,19 @@ export default function AudioPlayer() {
 
   return (
     <>
-      <div className="min-h-60 w-full rounded-lg shadow-lg">
+      <div
+        className={`min-h-60 w-full rounded-lg shadow-lg  ${
+          isAudioPlayerVisible ? 'visible' : 'hidden'
+        }`}
+      >
         <div
           className={`${
             isAudioPlayerVisible ? 'visible' : 'hidden'
           } h-full w-full flex flex-col justify-end items-center p-2`}
         >
+          <AudioNowPlaying />
           <AudioPlaylist />
-          <section
-            className={`w-full ${isAudioPlayerVisible ? 'visible' : 'hidden'}`}
-          >
+          <section className={`w-full`}>
             <AudioControls />
           </section>
         </div>
