@@ -1,4 +1,5 @@
 'use client';
+import { useEffect } from 'react';
 import {
   Pause,
   Play,
@@ -23,17 +24,31 @@ export default function AudioControls() {
     handleVolumeChange,
     handleMuteChange,
     handlePreviousSong,
-    handleNextSong
+    handleNextSong,
+    volumeSliderRef
   } = useAudioContext() ?? {};
+
+  // set background size on load
+  useEffect(() => {
+    if (volumeSliderRef?.current) {
+      const value = (parseFloat(volumeSliderRef.current.value) * 100).toFixed(
+        2
+      );
+      volumeSliderRef.current.style.backgroundSize = `${value}% 100%`;
+    }
+  }, [volumeSliderRef]);
 
   const volumeChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (handleVolumeChange) {
       handleVolumeChange(event);
     }
+    const target = event.target as HTMLInputElement;
+    const value = (parseFloat(target.value) * 100).toFixed(2);
+    target.style.backgroundSize = `${value}% 100%`;
   };
 
   return (
-    <div className="w-full max-w-md mx-auto flex flex-col justify-between items-center">
+    <div className="w-full max-w-sm mx-auto flex flex-col justify-between items-center">
       <section className="w-full text-center min-h-20">
         {playback && (
           <article className="flex flex-col items-center justify-center">
@@ -47,41 +62,28 @@ export default function AudioControls() {
         )}
       </section>
 
-      <section className="grid grid-cols-3 gap-4 items-center justify-center w-full">
-        <button
-          onClick={handlePreviousSong}
-          className="control-btn flex flex-col justify-center items-center"
-        >
-          <SkipBack weight="bold" className="h-6 w-6" />
-          <label className="control-label text-xs sm:text-sm lg:text-base">
-            Previous
-          </label>
+      <section className="w-full flex justify-between min-w-40 mx-auto">
+        <button onClick={handlePreviousSong} className="control-btn">
+          <SkipBack weight="bold" className="h-6 min-w-6 mx-auto" />
+          <label className="control-label">Previous</label>
         </button>
 
-        <button
-          onClick={handlePlayPause}
-          className="control-btn flex flex-col justify-center items-center"
-        >
+        <button onClick={handlePlayPause} className="control-btn">
           {playback ? (
-            <Pause weight="bold" className="h-8 w-8 " />
+            <Pause weight="bold" className="h-8 min-w-8 mx-auto" />
           ) : (
-            <Play weight="bold" className="h-8 w-8 " />
+            <Play weight="bold" className="h-8 min-w-8 mx-auto" />
           )}
-          <label className="control-label text-xs sm:text-sm lg:text-base">
-            {playback ? 'Pause' : 'Play'}
-          </label>
+          <label className="control-label">{playback ? 'Pause' : 'Play'}</label>
         </button>
 
-        <button
-          onClick={handleNextSong}
-          className="control-btn flex flex-col justify-center items-center"
-        >
-          <SkipForward weight="bold" className="" />
+        <button onClick={handleNextSong} className="control-btn">
+          <SkipForward weight="bold" className="h-6 min-w-6 mx-auto" />
           <label className="control-label">Next</label>
         </button>
       </section>
 
-      <section className="w-full min-w-40 mx-auto flex justify-between items-center p-2">
+      <div className="w-full flex justify-between items-center space-x-6">
         <button
           id="mute"
           type="button"
@@ -96,21 +98,21 @@ export default function AudioControls() {
           )}
           <label className="control-label">{mute ? 'Unmute' : 'Mute'}</label>
         </button>
-
-        <input
-          id="volume"
-          type="range"
-          min="0"
-          max="1"
-          step="0.01"
-          value={volume}
-          onChange={volumeChangeHandler}
-          className=""
-          style={{
-            backgroundSize: `${((volume ?? 0) * 100).toFixed(2)}% 100%`
-          }}
-        />
-      </section>
+        <div className="relative w-full h-full flex justify-center items-center px-8">
+          <input
+            id="volume"
+            ref={volumeSliderRef}
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value={volume}
+            onChange={volumeChangeHandler}
+            className="w-full"
+            style={{}}
+          />
+        </div>
+      </div>
     </div>
   );
 }

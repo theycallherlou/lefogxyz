@@ -25,4 +25,5 @@ interface AudioContextType {
   setVolume: React.Dispatch<React.SetStateAction<number>>;
   mute: boolean;
   setMute: React.Dispatch<React.SetStateAction<boolean>>;
+  volumeSliderRef: React.RefObject<HTMLInputElement>;
 }
