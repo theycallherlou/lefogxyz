@@ -1,5 +1,15 @@
+.control-btn {
+  min-width: 5rem;
+  flex: display;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .control-label {
   opacity: 0;
+  min-width: 100%;
+  font-weight: 600;
 }
 
 .control-btn:hover .control-label {
@@ -20,6 +30,10 @@
   transition: all 0.2s ease-in-out;
   font-size: small;
   background-color: var(--background-100);
+}
+
+.toggle-button:hover {
+  box-shadow: 0.25px 0.25px 0px 0.5px var(--text-200);
 }
 
 .toggle-button:active {
