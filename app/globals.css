@@ -10,26 +10,6 @@
   padding: 0;
 }
 
-:root {
-  --white: #ffffffff;
-  --black: #000000ff;
-  --text-50: #45494aff;
-  --text-100: #353839ff;
-  --text-200: #313435ff;
-  --background-50: #dde2e4ff;
-  --background-100: #d2d9dbff;
-  --background-200: #c6cfd2ff;
-  --primary-50: #4f5469ff;
-  --primary-100: #45495bff;
-  --primary-200: #3d4151ff;
-  --secondary-50: #dbbf95ff;
-  --secondary-100: #d4b483ff;
-  --secondary-200: #d0ac76ff;
-  --accent-50: #ca7d80ff;
-  --accent-100: #c1666bff;
-  --accent-200: #be6064ff;
-}
-
 html {
   max-width: 100dvw;
   font-family: var(--font-barlow), system-ui, -apple-system, BlinkMacSystemFont,
@@ -52,28 +32,6 @@ main {
   color: var(--text-50);
   background-color: var(--background-100);
   padding: 1.3rem;
-}
-
-@media screen and (prefers-color-scheme: dark) {
-  :root {
-    --white: #ffffffff;
-    --black: #000000ff;
-    --text-50: #dde2e4ff;
-    --text-100: #d2d9dbff;
-    --text-200: #c6cfd2ff;
-    --background-50: #45494aff;
-    --background-100: #353839ff;
-    --background-200: #313435ff;
-    --primary-50: #dbbf95ff;
-    --primary-100: #d4b483ff;
-    --primary-200: #d0ac76ff;
-    --secondary-50: #4f5469ff;
-    --secondary-100: #45495bff;
-    --secondary-200: #3d4151ff;
-    --accent-50: #ca7d80ff;
-    --accent-100: #c1666bff;
-    --accent-200: #be6064ff;
-  }
 }
 
 @layer utilities {

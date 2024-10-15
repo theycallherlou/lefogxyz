@@ -15,7 +15,7 @@ interface AudioContextType {
   loadNewSong: (src: string) => void;
   handleVolumeChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleMuteChange: () => void;
-  handlePlayPause: () => Promise<void>;
+  handlePlayPause: () => void;
   handleSongChange: (newIndex: number) => void;
   handlePreviousSong: () => void;
   handleNextSong: () => void;
@@ -25,4 +25,5 @@ interface AudioContextType {
   setVolume: React.Dispatch<React.SetStateAction<number>>;
   mute: boolean;
   setMute: React.Dispatch<React.SetStateAction<boolean>>;
+  volumeSliderRef: React.RefObject<HTMLInputElement>;
 }
